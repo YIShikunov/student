@@ -5,6 +5,21 @@ private:
 	List * nextPointer;
 	int data;
 public:
+	~List()
+	{
+		if (this->prevPointer != NULL)
+		{}
+		else
+		{
+			List* tmp = this;
+			while (tmp->nextPointer != NULL)
+			{
+				tmp = tmp->nextPointer;
+				delete tmp->prevPointer;
+			}
+		}
+		
+	}
 	List()
 	{
 		prevPointer = NULL;
@@ -53,9 +68,10 @@ public:
 		if (deleted->nextPointer != NULL)
 		{
 			deleted->nextPointer->prevPointer=temp;
-			temp->nextPointer = temp->nextPointer->nextPointer;
+			temp->nextPointer = deleted->nextPointer;
 		} else {
-			temp->nextPointer 
+			temp->nextPointer = NULL;
+		}
+		delete deleted;
 	};
-
 };
